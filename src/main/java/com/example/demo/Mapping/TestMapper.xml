@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.Mapping.TestMapper">
+
+	<resultMap id="testMap" type="com.example.demo.Model.TestModel">
+		<id property="id" column="id" javaType="java.lang.Integer"></id>
+		<result property="name" column="name" javaType="java.lang.String"></result>
+	</resultMap>
+	
+    <select id="getArtist" parameterType="int" resultMap="testMap">
+        select id,name from Artists a
+        where 1=1
+        <if test=" _parameter !=null and _parameter != 0 ">  
+        	 and a.id=#{_parameter ,jdbcType=INTEGER}
+    	</if>
+    </select> 
+    
+    <insert id="addArtist" parameterType="String" useGeneratedKeys="true" keyProperty="id">
+    	insert into artists(NAME) VALUES(#{_parameter ,jdbcType=VARCHAR})
+
+    </insert> 
+    
+    <update id="updateArtist" parameterType="com.example.demo.Model.TestModel">
+        update artists set name=#{name} where id=#{id}
+    </update> 
+    
+    <delete id="deleteArtist" parameterType="int">
+        delete from artists where id=#{_parameter ,jdbcType=INTEGER}
+    </delete>   
+</mapper>
