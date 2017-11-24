@@ -23,7 +23,7 @@ public class TestController {
         TestMapper mapper=session.getMapper(TestMapper.class);
         List<TestModel> Artists= null;
         try {
-        	String id=request.getParameter("id");
+        	String id=request.getParameter("id"); //   1111111
         	if(id==null || id=="") id="0";
         	Artists=mapper.getArtist(Integer.parseInt(id));
         	session.commit();
